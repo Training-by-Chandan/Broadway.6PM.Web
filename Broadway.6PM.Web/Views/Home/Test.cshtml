@@ -1,14 +1,22 @@
-﻿@{
+﻿@using Broadway._6PM.Web.ViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 @section AfterFooter{
-    
 
+}
 <div class="">
     <h1>Test Page</h1>
 </div>
 <div class="row">
     <button class="btn btn-primary">Click me</button>
 </div>
+<div class="row">
+
+    @for (int i = 0; i < 100; i++)
+    {
+        @Html.Partial("_PartialPage", new PPViewModel { Title = "Title " + i, ButtonText = "Button " + i, Body = "Body " + i })
     }
+</div>

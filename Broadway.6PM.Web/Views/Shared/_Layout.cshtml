@@ -16,7 +16,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Broadway 6 PM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @*it converts into <a> tag*@
+                @Html.ActionLink("Broadway 6 PM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", id = "abc" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -33,6 +34,8 @@
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Broadway 6PM Application</p>
+            @Html.Partial("_LoginPartial")
+
         </footer>
         @{
             int i = 10;
