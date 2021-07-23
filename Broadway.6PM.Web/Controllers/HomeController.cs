@@ -6,8 +6,10 @@ using System.Web.Mvc;
 
 namespace Broadway._6PM.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller //controller
     {
+        [AllowAnonymous]
         public ActionResult Index() //action
         {
             return View();
