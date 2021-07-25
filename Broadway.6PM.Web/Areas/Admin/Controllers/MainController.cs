@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Broadway._6PM.Web.Services;
+using Broadway._6PM.Web.ViewModel.Admin;
 
 namespace Broadway._6PM.Web.Areas.Admin.Controllers
 {
@@ -22,6 +23,25 @@ namespace Broadway._6PM.Web.Areas.Admin.Controllers
         {
             var data = userServices.GetAllUsers();
             return View(data);
+        }
+
+        [HttpGet]
+        public ActionResult Vendors()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateVendors(VendorsCreateRequestViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Vendors",model);
+            }
         }
     }
 }

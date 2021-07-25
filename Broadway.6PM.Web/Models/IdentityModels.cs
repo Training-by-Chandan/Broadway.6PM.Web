@@ -29,5 +29,7 @@ namespace Broadway._6PM.Web.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Vendors> Vendors { get; set; }
     }
 }

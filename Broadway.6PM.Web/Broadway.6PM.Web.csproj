@@ -194,15 +194,27 @@
     <Compile Include="Migrations\202107201234479_InitialCreate.Designer.cs">
       <DependentUpon>202107201234479_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107251241262_vendors.cs" />
+    <Compile Include="Migrations\202107251241262_vendors.Designer.cs">
+      <DependentUpon>202107251241262_vendors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107251253089_requiredFieldApplied.cs" />
+    <Compile Include="Migrations\202107251253089_requiredFieldApplied.Designer.cs">
+      <DependentUpon>202107251253089_requiredFieldApplied.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Vendors.cs" />
     <Compile Include="Services\UserServices.cs" />
+    <Compile Include="Services\VendorServices.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModel\Admin\UserlistViewModel.cs" />
+    <Compile Include="ViewModel\Admin\VendorsViewModel.cs" />
     <Compile Include="ViewModel\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\PPViewModel.cs" />
+    <Compile Include="ViewModel\RequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -222,6 +234,7 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Main\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Main\UserManagers.cshtml" />
+    <Content Include="Areas\Admin\Views\Main\Vendors.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -293,6 +306,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202107201234479_InitialCreate.resx">
       <DependentUpon>202107201234479_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107251241262_vendors.resx">
+      <DependentUpon>202107251241262_vendors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107251253089_requiredFieldApplied.resx">
+      <DependentUpon>202107251253089_requiredFieldApplied.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
