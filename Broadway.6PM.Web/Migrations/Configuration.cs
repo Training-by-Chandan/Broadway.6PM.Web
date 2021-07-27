@@ -27,6 +27,10 @@ namespace Broadway._6PM.Web.Migrations
             {
                 roleManager.Create(new IdentityRole() { Name = ConstString.Roles.Admin });
             }
+            if (!(db.Roles.Any(p => p.Name == ConstString.Roles.Vendors)))
+            {
+                roleManager.Create(new IdentityRole() { Name = ConstString.Roles.Vendors });
+            }
 
             if (!(db.Users.Any(u => u.UserName == "admin@admin.com")))
             {

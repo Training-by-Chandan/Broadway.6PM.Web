@@ -1,12 +1,19 @@
-﻿@model Broadway._6PM.Web.ViewModel.Admin.VendorsCreateRequestViewModel
+﻿@using Broadway._6PM.Web.ViewModel.Admin
+@model Broadway._6PM.Web.ViewModel.Admin.VendorsCreateRequestViewModel
 
 @{
     ViewBag.Title = "Vendors";
+    var res = ViewBag.Result as VendorsCreateResponseViewModel;
 }
 
 <h2>Vendors</h2>
 
-@using (Html.BeginForm("CreateVendors", "Main", new { Area = "Admin" }, FormMethod.Post ))
+@if (res != null && !res.Status)
+{
+    <span class="alert alert-danger">@res.Message</span>
+}
+
+@using (Html.BeginForm("CreateVendors", "Main", new { Area = "Admin" }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -43,14 +50,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
             </div>
         </div>
 

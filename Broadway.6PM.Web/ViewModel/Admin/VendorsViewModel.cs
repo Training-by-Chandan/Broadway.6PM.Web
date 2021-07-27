@@ -25,9 +25,6 @@ namespace Broadway._6PM.Web.ViewModel.Admin
         public string EmailAddress { get; set; }
 
         [Required]
-        public string Username { get; set; }
-
-        [Required]
         [MinLength(8)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
@@ -39,6 +36,26 @@ namespace Broadway._6PM.Web.ViewModel.Admin
 
         [Required]
         [DataType(DataType.Date)]
+        public DateTime StartDate { get; set; }
+    }
+
+    public class VendorViewModel
+    {
+        public int Id { get; set; }
+
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Required]
+        public string MobileNUmber { get; set; }
+
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        public string EmailAddress { get; set; }
+
         public DateTime StartDate { get; set; }
     }
 

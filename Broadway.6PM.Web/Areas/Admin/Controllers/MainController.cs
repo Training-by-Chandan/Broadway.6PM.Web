@@ -12,6 +12,7 @@ namespace Broadway._6PM.Web.Areas.Admin.Controllers
     public class MainController : Controller
     {
         private UserServices userServices = new UserServices();
+        private VendorServices vendorServices = new VendorServices();
 
         // GET: Admin/Main
         public ActionResult Index()
@@ -22,6 +23,12 @@ namespace Broadway._6PM.Web.Areas.Admin.Controllers
         public ActionResult UserManagers()
         {
             var data = userServices.GetAllUsers();
+            return View(data);
+        }
+
+        public ActionResult VendorList()
+        {
+            var data = vendorServices.GetAllVendors();
             return View(data);
         }
 
@@ -36,12 +43,40 @@ namespace Broadway._6PM.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                //enter the data
+                var res = vendorServices.CreateVendors(model);
+                if (res.Status)
+                {
+                    return RedirectToAction("VendorList");
+                }
+                else
+                {
+                    ViewBag.Result = res;
+                }
             }
-            else
+            return View("Vendors", model);
+        }
+
+        [HttpGet]
+        public ActionResult Editvendor(int id)
+        {
+            var vendor = vendorServices.GetVendorById(id);
+
+            return View(vendor);
+        }
+
+        [HttpPost]
+        public ActionResult EditVendor(VendorViewModel model)
+        {
+            if (ModelState.IsValid)
             {
-                return View("Vendors",model);
+                var res = vendorServices.EditVendor(model);
+                if (res.Status)
+                {
+                    return RedirectToAction("VendorList");
+                }
             }
+            return View(model);
         }
     }
 }
