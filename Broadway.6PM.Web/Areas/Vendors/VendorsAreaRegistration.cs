@@ -1,18 +1,18 @@
 ﻿using System.Web.Mvc;
 
-namespace Broadway._6PM.Web.Areas.Vendors
+namespace Broadway._6PM.Web.Areas.VendorsArea
 {
-    public class VendorsAreaRegistration : AreaRegistration 
+    public class VendorsAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "Vendors";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Vendors_default",

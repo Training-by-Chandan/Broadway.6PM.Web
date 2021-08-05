@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Broadway._6PM.Web.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,10 +10,13 @@ namespace Broadway._6PM.Web.Controllers
     [Authorize]
     public class HomeController : Controller //controller
     {
+        private CustomerService customer = new CustomerService();
+
         [AllowAnonymous]
         public ActionResult Index() //action
         {
-            return View();
+            var data = customer.GetDashboardItem();
+            return View(data);
         }
 
         public ActionResult About()
