@@ -213,6 +213,10 @@
     <Compile Include="Migrations\202108051239380_somechanges.Designer.cs">
       <DependentUpon>202108051239380_somechanges.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202108061236477_imageresource.cs" />
+    <Compile Include="Migrations\202108061236477_imageresource.Designer.cs">
+      <DependentUpon>202108061236477_imageresource.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categories.cs" />
     <Compile Include="Models\Product.cs" />
@@ -229,6 +233,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\PPViewModel.cs" />
+    <Compile Include="ViewModel\ProductImageUploadViewModel.cs" />
     <Compile Include="ViewModel\RequestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +486,7 @@
     <Content Include="Areas\Vendors\Views\Products\Details.cshtml" />
     <Content Include="Areas\Vendors\Views\Products\Edit.cshtml" />
     <Content Include="Areas\Vendors\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Vendors\Views\Products\UploadImage.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -793,6 +799,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Vendors\Data\" />
+    <Folder Include="uploaded\product\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -822,6 +829,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202108051239380_somechanges.resx">
       <DependentUpon>202108051239380_somechanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202108061236477_imageresource.resx">
+      <DependentUpon>202108061236477_imageresource.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

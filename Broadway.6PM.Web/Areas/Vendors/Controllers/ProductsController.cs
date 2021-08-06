@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Broadway._6PM.Web.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Broadway._6PM.Web.ViewModel;
 
 namespace Broadway._6PM.Web.Areas.VendorsArea.Controllers
 {
@@ -146,6 +147,35 @@ namespace Broadway._6PM.Web.Areas.VendorsArea.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult UploadImage(int id)
+        {
+            var product = db.Products.Find(id);
+            ViewBag.product = product;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(ProductImageUploadViewModel model)
+        {
+            //todo  save images and add in database
+            foreach (var item in model.File)
+            {
+                var imagename = Guid.NewGuid().ToString();
+                var uploadedFileExtension = System.IO.Path.GetExtension(item.FileName);
+                var finalpath = $"/uploaded/product/{imagename}.{uploadedFileExtension}";
+                item.SaveAs(Server.MapPath("~/" + finalpath));
+
+                var imageResource = new ImageResource()
+                {
+                    ImagePath = finalpath,
+                    ProductId = model.Id
+                };
+                db.Images.Add(imageResource);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
     }
 }

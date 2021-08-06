@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "UploadImage";
+    var product = ViewBag.product as Broadway._6PM.Web.Models.Product;
+}
+
+<h2>UploadImage</h2>
+@using (Html.BeginForm("UploadImage", "Products", new { Area = "Vendors" }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input type="hidden" value="@product.Id" />
+    <div class="col-md-10">
+        <input type="file" name="File" class="form-control text-box single-line" multiple />
+    </div>
+    <button class="btn btn-success" type="submit">Submit</button>
+}

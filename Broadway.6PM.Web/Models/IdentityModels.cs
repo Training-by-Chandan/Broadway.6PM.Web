@@ -48,6 +48,7 @@ namespace Broadway._6PM.Web.Models
         public DbSet<Vendors> Vendors { get; set; }
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<ImageResource> Images { get; set; }
     }
 
     //public class VenorUser : EntityTypeConfiguration<Vendors>

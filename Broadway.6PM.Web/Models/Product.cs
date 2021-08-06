@@ -22,5 +22,17 @@ namespace Broadway._6PM.Web.Models
 
         [ForeignKey("VendorId")]
         public virtual Vendors Vendors { get; set; }
+
+        public ICollection<ImageResource> Images { get; set; }
+    }
+
+    public class ImageResource
+    {
+        public int Id { get; set; }
+        public string ImagePath { get; set; }
+        public int ProductId { get; set; }
+
+        [ForeignKey("ProductId")]
+        public virtual Product Product { get; set; }
     }
 }
