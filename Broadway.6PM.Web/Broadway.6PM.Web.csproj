@@ -228,6 +228,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="ViewModel\Admin\UserlistViewModel.cs" />
     <Compile Include="ViewModel\Admin\VendorsViewModel.cs" />
+    <Compile Include="ViewModel\CartViewModel.cs" />
     <Compile Include="ViewModel\FromtPageViewModel.cs" />
     <Compile Include="ViewModel\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

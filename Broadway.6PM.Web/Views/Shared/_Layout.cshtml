@@ -24,8 +24,21 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                   <li>
+                       @{
+                           var cart = Session[ConstString.CartSession] as Broadway._6PM.Web.ViewModel.CartSessionViewModel;
+                           if (cart != null)
+                           {
+                              
+                                   @cart.CartItems.Sum(p => p.Count) 
+                              
+                           }
+                       } items
+                   </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
+
+              
             </div>
         </div>
     </div>
@@ -35,7 +48,7 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - Broadway 6PM Application</p>
         </footer>
-       
+
         @RenderSection("AfterFooter", required: false)
     </div>
 

@@ -12,5 +12,7 @@ namespace Broadway._6PM.Web
             public const string Admin = "Admin";
             public const string Vendors = "Vendors";
         }
+
+        public const string CartSession = "Cart";
     }
 }
