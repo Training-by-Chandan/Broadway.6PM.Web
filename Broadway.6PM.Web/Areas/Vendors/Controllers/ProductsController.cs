@@ -41,7 +41,7 @@ namespace Broadway._6PM.Web.Areas.VendorsArea.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = await db.Products.FindAsync(id);
+            Product product = await db.Products.Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == id);
             if (product == null)
             {
                 return HttpNotFound();
@@ -164,7 +164,7 @@ namespace Broadway._6PM.Web.Areas.VendorsArea.Controllers
             {
                 var imagename = Guid.NewGuid().ToString();
                 var uploadedFileExtension = System.IO.Path.GetExtension(item.FileName);
-                var finalpath = $"/uploaded/product/{imagename}.{uploadedFileExtension}";
+                var finalpath = $"/uploaded/product/{imagename}{uploadedFileExtension}";
                 item.SaveAs(Server.MapPath("~/" + finalpath));
 
                 var imageResource = new ImageResource()

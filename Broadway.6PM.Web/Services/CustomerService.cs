@@ -22,7 +22,11 @@ namespace Broadway._6PM.Web.Services
                     Id = x.Id,
                     Name = x.Name,
                     Price = x.Price,
-                    Stock = x.NumberofStock
+                    Stock = x.NumberofStock,
+                    Images = x.Images.Select(y => new ImageViewModel()
+                    {
+                        FilePath = y.ImagePath
+                    }).ToList()
                 }).ToList()
             });
 

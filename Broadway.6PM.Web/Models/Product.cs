@@ -8,6 +8,11 @@ namespace Broadway._6PM.Web.Models
 {
     public class Product
     {
+        public Product()
+        {
+            this.Images = new HashSet<ImageResource>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

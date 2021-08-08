@@ -14,7 +14,12 @@
                     <h4>@product.Name</h4>
                     <h5>@product.Stock Stocks</h5>
                     <h5>NPR @product.Price</h5>
+               @foreach (var image in product.Images)
+               {
+                   <img src="@image.FilePath" width="50" height="50" />
+               }
                 </div>
+               
             }
         </div>
     }
