@@ -868,6 +868,7 @@
     <Content Include="softui\assets\scss\soft-ui-dashboard\_utilities-extend.scss" />
     <Content Include="softui\assets\scss\soft-ui-dashboard\_utilities.scss" />
     <Content Include="softui\assets\scss\soft-ui-dashboard\_variables.scss" />
+    <Content Include="Views\Home\AjaxCategories.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

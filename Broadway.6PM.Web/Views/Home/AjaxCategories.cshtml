@@ -1,0 +1,147 @@
+﻿@{
+    ViewBag.Title = "AjaxCategories";
+}
+
+<h2>AjaxCategories</h2>
+<button id="createCategories" class="btn btn-outline-primary" onclick="">Create New</button>
+<table id="catTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Parent Name</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Create Categories</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                  <input type="text" placeholder="CategoryName" id="categoryname" />
+              </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="btncreateCat" type="button" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editcat" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Edit Categories</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="editfrm">
+                    <input type="hidden" id="editcatId" name="Id"/>
+                    <input type="text" placeholder="CategoryName" id="editcategoryname" name="Name"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="editcateCat" type="button" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(loaddata);
+
+        function loaddata() {
+            $('#createCategories').on('click', CreateCategoriesOpenForm)
+            $('#btncreateCat').on('click', CreateCategories)
+            $('#editcateCat').on('click', editCategories)
+            loadcat();
+           
+        }
+
+        function loadcat() {
+            $.ajax({
+                url: '/api/categoriesapi/getcategories',
+                method: 'get'
+            }).done(function (data, status) {
+                data.forEach((a) => {
+                    var parent = a.ParentCategory == undefined ? '' : a.ParentCategory.Name
+                    $('#catTable tbody').append('<tr><td>' + a.Name + '</td><td>' + parent + '</td><td>' + a.Description + '</td><td><button class="btn btn-outline-primary" onclick="editcatpage(' + a.Id + ')">Edit</button> | Details | <button class="btn btn-outline-primary" onclick="deleteCategories(' + a.Id +')">Delete</button></td></tr>');
+                });
+            }).fail(function (err) {
+                console.log(err);
+            })
+        }
+
+        function CreateCategoriesOpenForm() {
+            $('#staticBackdrop').modal('show');
+        }
+
+        function editcatpage(id) {
+            $('#editcatId').val(id);
+            $('#editcat').modal('show');
+        }
+
+        function editCategories() {
+            $.ajax({
+                url: '/api/categoriesapi/putcategories/' + $('#editcatId').val(),
+                method: 'put',
+                data: $('#editfrm').serialize()
+            }).done(function () {
+                $('#catTable tbody').html('');
+                loadcat();
+                $('#editcat').modal('hide');
+            }).fail(function () {
+
+            })
+        }
+
+        function deleteCategories(id) {
+            $.ajax({
+                url: '/api/categoriesapi/deletecategories/' + id,
+                method: 'delete',
+                
+            }).done(function () {
+                $('#catTable tbody').html('');
+                loadcat();
+                
+            }).fail(function () {
+
+            })
+        }
+
+        function CreateCategories() {
+            $.ajax({
+                url: '/api/categoriesapi/postcategories',
+                method: 'post',
+                data: 'name=' + $('#categoryname').val()
+            }).done(function() {
+                $('#catTable tbody').html('');
+                loadcat();
+                $('#staticBackdrop').modal('hide');
+            }).fail(function() {
+
+            })
+        }
+
+
+    </script>
+
+}

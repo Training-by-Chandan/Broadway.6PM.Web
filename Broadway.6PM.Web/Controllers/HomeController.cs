@@ -101,5 +101,10 @@ namespace Broadway._6PM.Web.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult AjaxCategories()
+        {
+            return View();
+        }
     }
 }
