@@ -33,4 +33,52 @@ namespace Broadway._6PM.Web.Services
             return new FrontPageViewModel() { Items = products.ToList() };
         }
     }
+
+    public class FailureClass
+    {
+        public static void FailedTest()
+        {
+            try
+            {
+                FailureClass2.FailedTest();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+
+    public class FailureClass2
+    {
+        public static void FailedTest()
+        {
+            try
+            {
+                FailureClass3.FailedTest();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+
+    public class FailureClass3
+    {
+        public static void FailedTest()
+        {
+            try
+            {
+                int[] i = new int[2];
+                i[0] = 1;
+                i[1] = 2;
+                i[2] = 3;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
 }

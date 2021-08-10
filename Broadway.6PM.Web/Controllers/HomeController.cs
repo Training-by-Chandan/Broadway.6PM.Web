@@ -44,7 +44,7 @@ namespace Broadway._6PM.Web.Controllers
         public ActionResult AddToCart(int id)
         {
             //todo : add item to cart
-            
+
             var cart = Session[ConstString.CartSession] as CartSessionViewModel;
             if (cart == null)
             {
@@ -85,9 +85,21 @@ namespace Broadway._6PM.Web.Controllers
             }
 
             Session[ConstString.CartSession] = cart;
-           // Session.Timeout = 1;
+            // Session.Timeout = 1;
 
             return RedirectToAction("index");
+        }
+
+        public ActionResult failedAction()
+        {
+            try
+            {
+                FailureClass.FailedTest();
+            }
+            catch (Exception)
+            {
+            }
+            return RedirectToAction("Index");
         }
     }
 }
