@@ -10,6 +10,8 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 
+using System.Web.Http.Cors;
+
 namespace Broadway._6PM.Web
 {
     public static class WebApiConfig
@@ -17,6 +19,12 @@ namespace Broadway._6PM.Web
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
+            var json = config.Formatters.JsonFormatter;
+            json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             // Web API routes
             config.MapHttpAttributeRoutes();

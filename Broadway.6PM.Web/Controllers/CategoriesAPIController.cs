@@ -13,7 +13,7 @@ using Broadway._6PM.Web.Models;
 
 namespace Broadway._6PM.Web.Controllers
 {
-    [Authorize]
+
     public class CategoriesAPIController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
