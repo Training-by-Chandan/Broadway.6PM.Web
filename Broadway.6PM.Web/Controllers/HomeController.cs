@@ -16,10 +16,21 @@ namespace Broadway._6PM.Web.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [AllowAnonymous]
-        public ActionResult Index() //action
+        public ActionResult Index(int id = 0) //action
         {
-            var data = customer.GetDashboardItem();
-            return View(data);
+            if (id == 1)
+            {
+                throw new SomeException("");
+            }
+            else if (id == 2)
+            {
+                return null;
+            }
+            else
+            {
+                // var data = customer.GetDashboardItem();
+                return View();
+            }
         }
 
         public ActionResult About()
@@ -106,5 +117,25 @@ namespace Broadway._6PM.Web.Controllers
         {
             return View();
         }
+    }
+
+    [Serializable]
+    public class SomeException : Exception
+    {
+        public SomeException()
+        {
+        }
+
+        public SomeException(string message) : base(message)
+        {
+        }
+
+        public SomeException(string message, Exception inner) : base(message, inner)
+        {
+        }
+
+        protected SomeException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 }

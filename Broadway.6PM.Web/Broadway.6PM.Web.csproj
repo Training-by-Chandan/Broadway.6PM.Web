@@ -259,6 +259,7 @@
     <Compile Include="Areas\Admin\Controllers\VendorsController.cs" />
     <Compile Include="Areas\Vendors\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Vendors\VendorsAreaRegistration.cs" />
+    <Compile Include="ArithmeticOperation.cs" />
     <Compile Include="ConstString.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesAPIController.cs" />
