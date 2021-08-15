@@ -1,9 +1,11 @@
 ﻿using Broadway._6PM.Web.Models;
 using Broadway._6PM.Web.Services;
 using Broadway._6PM.Web.ViewModel;
+using Hangfire;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -28,22 +30,23 @@ namespace Broadway._6PM.Web.Controllers
             }
             else
             {
-                // var data = customer.GetDashboardItem();
-                return View();
+                var data = customer.GetDashboardItem();
+                return View(data);
             }
         }
 
-        public ActionResult About()
+        public async Task<ActionResult> About(int time = 60000)
         {
             ViewBag.Message = "Your application description page.";
-
+            await DelayClass.Delay(time);
             return View();
         }
 
-        public ActionResult Contact()
+        public async Task<ActionResult> Contact()
         {
             ViewBag.Message = "Your contact page.";
-
+            RecurringJob.AddOrUpdate("myrecurringjob",() => DelayClass.DelayFromHagfire(60000), Cron.MonthInterval(2));
+            await DelayClass.DelayFromHagfire(60000);
             return View();
         }
 
@@ -116,6 +119,19 @@ namespace Broadway._6PM.Web.Controllers
         public ActionResult AjaxCategories()
         {
             return View();
+        }
+    }
+
+    public class DelayClass
+    {
+        public static async Task Delay(int time = 60000)
+        {
+            await Task.Delay(time);
+        }
+
+        public static async Task DelayFromHagfire(int time = 60000)
+        {
+            Hangfire.BackgroundJob.Enqueue(() => Task.Delay(time));
         }
     }
 
