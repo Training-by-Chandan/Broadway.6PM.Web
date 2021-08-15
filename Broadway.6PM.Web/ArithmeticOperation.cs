@@ -19,6 +19,8 @@ namespace Broadway._6PM.Web
 
         public double Multiply(double a, double b)
         {
+            Singleton.Get.Id = 20;
+            var s = Singleton.Get.Id;
             return a * b;
         }
 

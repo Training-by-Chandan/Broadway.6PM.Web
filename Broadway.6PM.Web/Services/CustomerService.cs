@@ -7,9 +7,14 @@ using System.Web;
 
 namespace Broadway._6PM.Web.Services
 {
-    public class CustomerService
+    public class CustomerService : ICustomerService
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationDbContext db;
+
+        public CustomerService(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
 
         public FrontPageViewModel GetDashboardItem()
         {

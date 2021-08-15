@@ -14,8 +14,14 @@ namespace Broadway._6PM.Web.Controllers
     [Authorize]
     public class HomeController : Controller //controller
     {
-        private CustomerService customer = new CustomerService();
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ICustomerService customer;
+        private readonly ApplicationDbContext db;
+
+        public HomeController(ICustomerService cs, ApplicationDbContext appDb)
+        {
+            customer = cs;
+            db = appDb;
+        }
 
         [AllowAnonymous]
         public ActionResult Index(int id = 0) //action
@@ -45,7 +51,7 @@ namespace Broadway._6PM.Web.Controllers
         public async Task<ActionResult> Contact()
         {
             ViewBag.Message = "Your contact page.";
-            RecurringJob.AddOrUpdate("myrecurringjob",() => DelayClass.DelayFromHagfire(60000), Cron.MonthInterval(2));
+            RecurringJob.AddOrUpdate("myrecurringjob", () => DelayClass.DelayFromHagfire(60000), Cron.MonthInterval(2));
             await DelayClass.DelayFromHagfire(60000);
             return View();
         }

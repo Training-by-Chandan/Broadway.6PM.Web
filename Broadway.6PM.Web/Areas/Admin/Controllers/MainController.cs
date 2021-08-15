@@ -11,8 +11,14 @@ namespace Broadway._6PM.Web.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class MainController : Controller
     {
-        private UserServices userServices = new UserServices();
-        private VendorServices vendorServices = new VendorServices();
+        private IUserServices userServices;
+        private IVendorServices vendorServices;
+
+        public MainController(IUserServices userServices, IVendorServices vendor)
+        {
+            this.userServices = userServices;
+            this.vendorServices = vendor;
+        }
 
         // GET: Admin/Main
         public ActionResult Index()

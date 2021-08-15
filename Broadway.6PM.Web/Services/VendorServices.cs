@@ -7,12 +7,22 @@ using Broadway._6PM.Web.ViewModel.Admin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Broadway._6PM.Web.ViewModel;
+using Broadway._6PM.Web.Repositories;
 
 namespace Broadway._6PM.Web.Services
 {
-    public class VendorServices
+    public class VendorServices : IVendorServices
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ICustomerService customer;
+        private IBaseRepository<Vendors> vendors;
+        private ApplicationDbContext db;
+
+        public VendorServices(IBaseRepository<Vendors> vendor, ICustomerService customer, ApplicationDbContext db)
+        {
+            this.vendors = vendor;
+            this.customer = customer;
+            this.db = db;
+        }
 
         public VendorsCreateResponseViewModel CreateVendors(VendorsCreateRequestViewModel model)
         {
@@ -59,7 +69,7 @@ namespace Broadway._6PM.Web.Services
 
         public List<VendorViewModel> GetAllVendors()
         {
-            var data = db.Vendors.Select(p => new VendorViewModel
+            var data = vendors.GetAll().Select(p => new VendorViewModel
             {
                 Address = p.Address,
                 EmailAddress = p.Email,
@@ -73,7 +83,7 @@ namespace Broadway._6PM.Web.Services
 
         public VendorViewModel GetVendorById(int id)
         {
-            var vendor = db.Vendors.Find(id);
+            var vendor = vendors.GetById(id);
             if (vendor != null)
             {
                 return new VendorViewModel()
@@ -97,7 +107,7 @@ namespace Broadway._6PM.Web.Services
             try
             {
                 var existingVendor = db.Vendors.Find(model.Id);
-                if (existingVendor==null)
+                if (existingVendor == null)
                 {
                     res.Message = "Vendor not found";
                 }

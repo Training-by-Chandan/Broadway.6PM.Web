@@ -9,7 +9,7 @@ using Broadway._6PM.Web.ViewModel.Admin;
 
 namespace Broadway._6PM.Web.Services
 {
-    public class UserServices
+    public class UserServices : IUserServices
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
